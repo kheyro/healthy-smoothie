@@ -4,4 +4,7 @@ class Smoothy < ApplicationRecord
   has_many :categories, through: :smoothy_categories
   has_many :quantities
   has_many :ingredients, through: :quantities
+
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :visibility, presence: true, inclusion: { in: %w(public private) }
 end
