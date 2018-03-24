@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HealthySmoothie</title>
+    <title>Cryptofolio</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+
+    <%= render 'layouts/header' %>
+
+    <div class="container h-100">
+      <div class="row mt-4">
+        <div class="col">
+          <% if notice %>
+            <div class="alert alert-primary" role="alert">
+              <%= notice %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+
+        <%= yield %>
+    </div>
+
   </body>
 </html>
