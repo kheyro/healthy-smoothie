@@ -25,23 +25,14 @@ ActiveRecord::Schema.define(version: 20180324144441) do
   end
 
   create_table "quantities", force: :cascade do |t|
-    t.integer "smoothie_id"
+    t.integer "smoothy_id"
     t.integer "ingredient_id"
     t.float "quantity"
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_quantities_on_ingredient_id"
-    t.index ["smoothie_id"], name: "index_quantities_on_smoothie_id"
-  end
-
-  create_table "smoothie_categories", force: :cascade do |t|
-    t.integer "smoothie_id"
-    t.integer "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_smoothie_categories_on_category_id"
-    t.index ["smoothie_id"], name: "index_smoothie_categories_on_smoothie_id"
+    t.index ["smoothy_id"], name: "index_quantities_on_smoothy_id"
   end
 
   create_table "smoothies", force: :cascade do |t|
@@ -52,6 +43,15 @@ ActiveRecord::Schema.define(version: 20180324144441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_smoothies_on_user_id"
+  end
+
+  create_table "smoothy_categories", force: :cascade do |t|
+    t.integer "smoothy_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_smoothy_categories_on_category_id"
+    t.index ["smoothy_id"], name: "index_smoothy_categories_on_smoothy_id"
   end
 
   create_table "users", force: :cascade do |t|

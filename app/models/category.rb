@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
-  has_many :smoothie_categories
-  has_many :smoothies, through: :smoothie_categories
+  has_many :smoothy_categories
+  has_many :smoothies, through: :smoothy_categories
 end
