@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   def welcome
   end
 
+  rescue_from ActiveRecord::RecordInvalid do |e|
+    render json: { error: { RecordInvalid: e.record.errors } }, status: 406
+  end
+
   private
 
   def current_user

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'application#welcome'
 
-  resources :users
+  resources :users do
+    resources :smoothies
+  end
+  
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: 'destroy_user'
