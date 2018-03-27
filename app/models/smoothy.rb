@@ -13,7 +13,8 @@ class Smoothy < ApplicationRecord
   def quantities_attributes=(quantities_attributes)
     self.quantities.destroy_all
     # uniq { |p| p["ingredient_id"] } uniq ingredient, keep the first in the array
-    quantities_attributes.uniq { |p| p["ingredient_id"] }.each do |t|
+    filteredQuantities = quantities_attributes.uniq { |q| q["ingredient_id"] }.reject { |q| q["quantity"].empty? || q["quantity"].to_i <= 0 }
+    filteredQuantities.each do |t|
       self.quantities.build(t)
     end
 

@@ -1,65 +1,30 @@
 <h1><%= current_user.name %>'s Smoothies</h1>
 
-<div id="add-smoothy-container">
-  <h3>Add a new smoothie</h3>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#smoothieFormModal">
+  Add Smoothie
+</button>
 
-  <%= form_for [current_user, @smoothy] do |f| %>
-
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
+<div id="smoothieFullCard">
+  <h2></h2>
+  <div class="row smoothie-description">
+    <div class="col">
+      <p></p>
     </div>
-
-    <div class="form-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: "form-control" %>
+  </div>
+  <div class="row smoothie-ingredients">
+    <div class="col">
+      <h5>Ingredients</h5>
+      <ul>
+      </ul>
     </div>
-
-    <div class="form-group">
-      <%= f.label :visibility %>
-      <div class="form-check form-check-inline">
-        <%= f.radio_button :visibility, "public", checked: true, class: 'form-check-input' %>
-        <label class="form-check-label" for="smoothy_visibility_public">Public</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <%= f.radio_button :visibility, "private", class: 'form-check-input' %>
-        <label class="form-check-label" for="smoothy_visibility_private">Private</label>
-      </div>
+  </div>
+  <div class="row smoothie-author">
+    <div class="col">
+      By <span></span>
     </div>
-
-    <div id="ingredient-list">
-    <%= f.fields_for :quantities, @smoothy.quantities.build do |s| %>
-      <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <%= s.label :ingredient_id %>
-          <%= s.select :ingredient_id, Ingredient.all.collect { |c| [ c.name.titleize, c.id ] }, {include_blank: false}, {class: "form-control", name: "smoothy[quantities_attributes][][ingredient_id]"}  %>
-        </div>
-
-        <div class="col-md-3 mb-2">
-          <%= s.label :quantity %>
-          <%= s.text_field :quantity, class: "form-control", name: "smoothy[quantities_attributes][][quantity]" %>
-        </div>
-
-        <div class="col-md-3 mb-1">
-          <%= s.label :unit %>
-          <%= s.select(:unit, ['ml', 'L', 'pcs', 'g', 'kg', 'cups', 'spoon'], {}, {class: "form-control", name: "smoothy[quantities_attributes][][unit]"}) %>
-        </div>
-
-        <div class="col-md-1 mb-1">
-          <label for="">.</label>
-          <button class="btn btn-danger btn-remove-ingredient">-</button>
-          <button class="btn btn-primary btn-add-ingredient">+</button>
-        </div>
-
-      </div>
-    <% end %>
-    </div>
-
-    <%= f.submit 'Add smoothie', class: 'btn btn-primary' %>
-
-  <% end %>
-
+  </div>
 </div>
+
 
 <div id="smoothies-list">
   <div class="card-columns">
@@ -71,7 +36,7 @@
         <p class="card-text"><%= smoothie.description %></p>
       </div>
       <div class="card-footer">
-        <small class="text-muted">By <%= smoothie.user.name %></small>
+        <small class="smoothie-user text-muted" data-id="<%= smoothie.user.id %>">By <%= smoothie.user.name %></small>
         <div class="card-action">
           <a href="#" class="edit-smoothie">Edit</a>
           <a href="#" class="delete-smoothie">Delete</a>
@@ -79,5 +44,80 @@
       </div>
     </div>
     <% end %>
+  </div>
+</div>
+
+
+<div class="modal fade" id="smoothieFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add/Edit Smoothie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="add-smoothy-container">
+          <%= form_for [current_user, @smoothy] do |f| %>
+
+            <div class="form-group">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :description %>
+              <%= f.text_area :description, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :visibility %>
+              <div class="form-check form-check-inline">
+                <%= f.radio_button :visibility, "public", checked: true, class: 'form-check-input' %>
+                <label class="form-check-label" for="smoothy_visibility_public">Public</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= f.radio_button :visibility, "private", class: 'form-check-input' %>
+                <label class="form-check-label" for="smoothy_visibility_private">Private</label>
+              </div>
+            </div>
+
+            <div id="ingredient-list">
+            <%= f.fields_for :quantities, @smoothy.quantities.build do |s| %>
+              <div class="form-row">
+                <div class="col-md-4 mb-3">
+                  <%= s.label :ingredient_id %>
+                  <%= s.select :ingredient_id, Ingredient.all.collect { |c| [ c.name.titleize, c.id ] }, {include_blank: false}, {class: "form-control", name: "smoothy[quantities_attributes][][ingredient_id]"}  %>
+                </div>
+
+                <div class="col-md-3 mb-2">
+                  <%= s.label :quantity %>
+                  <%= s.text_field :quantity, class: "form-control", name: "smoothy[quantities_attributes][][quantity]" %>
+                </div>
+
+                <div class="col-md-2 mb-1">
+                  <%= s.label :unit %>
+                  <%= s.select(:unit, ['ml', 'L', 'pcs', 'g', 'kg', 'cups', 'spoon'], {}, {class: "form-control", name: "smoothy[quantities_attributes][][unit]"}) %>
+                </div>
+
+                <div class="col-md-3 mb-1">
+                  <label for="">.</label>
+                  <button class="btn btn-danger btn-remove-ingredient">-</button>
+                  <button class="btn btn-primary btn-add-ingredient">+</button>
+                </div>
+
+              </div>
+            <% end %>
+            </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn-cancel btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <%= f.submit 'Save', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

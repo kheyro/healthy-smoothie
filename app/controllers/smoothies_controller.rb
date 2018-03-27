@@ -4,7 +4,7 @@ class SmoothiesController < ApplicationController
   # protect_from_forgery :except => [:update, :destroy, :create]
 
   def index
-    @smoothies = Smoothy.where(user: current_user)
+    @smoothies = Smoothy.where(user: current_user).order(updated_at: :desc)
     @smoothy = current_user.smoothies.build
   end
 
