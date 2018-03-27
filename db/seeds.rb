@@ -26,7 +26,8 @@ yogurt = Category.create(name: "Yogurt smootie")
 first_smoothie = john.smoothies.create(
   name: "My first smoothie",
   description: "The perfect protein smoothie after a long work out session, refreshing, energizing and full of protein!")
-first_smoothie.categories.push(protein)
+first_smoothie.category = protein
+first_smoothie.save
 first_smoothie.quantities.create(ingredient: Ingredient.first, unit: "pcs")
 first_smoothie.quantities.create(ingredient: Ingredient.last, unit: "pcs")
 first_smoothie.save

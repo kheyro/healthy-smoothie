@@ -1,7 +1,6 @@
 class Smoothy < ApplicationRecord
   belongs_to :user
-  has_many :smoothy_categories
-  has_many :categories, through: :smoothy_categories
+  belongs_to :category
   has_many :quantities, :dependent => :delete_all
   has_many :ingredients, through: :quantities
 

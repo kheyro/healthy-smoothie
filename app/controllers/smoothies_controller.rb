@@ -38,6 +38,6 @@ class SmoothiesController < ApplicationController
   private
 
     def smoothie_params
-      params.require(:smoothy).permit(:name, :description, :visibility, quantities_attributes: [:ingredient_id, :quantity, :unit])
+      params.require(:smoothy).permit(:name, :description, :visibility, :category_id, quantities_attributes: [:ingredient_id, :quantity, :unit])
     end
 end
