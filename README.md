@@ -1,24 +1,29 @@
-# README
+# RAILS with JS Project - Healthy Smoothy
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to Healthy Smoothy! Show to the world your smoothies' skills, share them with the community! Drink and be healthy!
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+Copy all folders and files
 
-* System dependencies
+And then execute:
 
-* Configuration
+    $ bundle install
 
-* Database creation
+Migrate databases and seed:
 
-* Database initialization
+    $ rake db:migrate
+    $ rake db:seed
 
-* How to run the test suite
+## Usage
 
-* Services (job queues, cache servers, search engines, etc.)
+Start server by running:
 
-* Deployment instructions
+    $ rails s
 
-* ...
+Login with admin credentials (admin@gmail.com // admin)
+One user is created through `seed` file, (john@gmail.com // user)
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/kheyro/healthy-smoothie.
