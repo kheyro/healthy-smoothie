@@ -30,6 +30,7 @@ let ready = () => {
     }).done(function(data) {
       console.log(data)
       $('#smoothies-list .card-columns').hide()
+      $('#smoothies-list .card-columns').html('')
       data.data.forEach(function(singleData) {
         let smoothie = new Smoothie({data: singleData})
         smoothieCard = smoothie.renderCard()
