@@ -107,7 +107,7 @@ class Smoothie {
           </div>
           <div class="card-footer">
             <small class="smoothie-user text-muted" data-id="${this.userId}">By ${this.username}</small>
-            <div class="card-action">
+            <div class="card-action float-right">
               <a href="#" class="edit-smoothie">Edit</a>
               <a href="#" class="delete-smoothie">Delete</a>
             </div>
