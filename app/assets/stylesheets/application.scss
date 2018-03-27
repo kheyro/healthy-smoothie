@@ -17,6 +17,7 @@
 html, body { height: 100% }
 a:hover { text-decoration: none; }
 textarea { height: 230px; }
+h1 { margin-bottom: 35px; }
 // .container { position: relative }
 
 .field_with_errors input[type="text"], .field_with_errors input[type="password"] {
@@ -33,10 +34,14 @@ textarea { height: 230px; }
 }
 
 #ingredient-list {
-  label { display: block; }
+  label {
+    display: block;
+  }
 }
 
 #smoothies-list {
+  margin-top: 35px;
+
   .card {
     cursor: pointer;
     &:hover {

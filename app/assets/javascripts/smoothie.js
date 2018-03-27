@@ -2,13 +2,13 @@ class Smoothie {
   constructor(data) {
     this.id = data.data.id
     this.name = data.data.attributes.name
-    this.userId = data.included[0].id
-    let defaultUsername = data.included[0].attributes.name
-    this.username = defaultUsername[0].toUpperCase() + defaultUsername.substr(1)
+    this.user = data.data.attributes.user
     this.description = data.data.attributes.description
     this.visibility = data.data.attributes.visibility
-    this.ingredients = data.included.slice(1)
     this.category = data.data.attributes.category
+    if (data.included) {
+      this.ingredients = data.included.slice(1)
+    }
   }
 
   populateForm() {
@@ -31,7 +31,18 @@ class Smoothie {
     $("#ingredient-list .form-row:not(:last) div .btn-add-ingredient").remove(); // Clean add ingredient button
   }
 
-  renderCard() {
+  renderCard(modeEdit = false) {
+
+    let actionDiv = ""
+
+     if (modeEdit) {
+       actionDiv = `
+         <div class="card-action float-right">
+           <a href="#" class="edit-smoothie">Edit</a>
+           <a href="#" class="delete-smoothie">Delete</a>
+         </div>`
+     }
+
     return `
         <div class="card" data-id="${this.id}">
           <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
@@ -40,11 +51,8 @@ class Smoothie {
             <p class="card-text">${this.description}</p>
           </div>
           <div class="card-footer">
-            <small class="smoothie-user text-muted" data-id="${this.userId}">by ${this.username} in <span class="card-category">${this.category.name}</span></small>
-            <div class="card-action float-right">
-              <a href="#" class="edit-smoothie">Edit</a>
-              <a href="#" class="delete-smoothie">Delete</a>
-            </div>
+            <small class="smoothie-user text-muted" data-id="${this.user.id}">by ${this.user.name} in <span class="card-category">${this.category.name}</span></small>
+            ${actionDiv}
           </div>
         </div>`
   }
@@ -54,7 +62,7 @@ class Smoothie {
 
     $smoothieFullCard.find('h5.smoothie-title').text(this.name)
     $smoothieFullCard.find('.smoothie-description p').text(this.description)
-    $smoothieFullCard.find('.smoothie-author').text(this.username)
+    $smoothieFullCard.find('.smoothie-author').text(this.user.name)
     $smoothieFullCard.find('.smoothie-category').text(this.category.name)
 
     this.ingredients.forEach(function(el, i) {

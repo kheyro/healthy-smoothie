@@ -17,9 +17,27 @@
 //= require popper
 //= require bootstrap
 
-var currentSmoothie
+let currentSmoothie
 
-$(function(){
+let ready = () => {
+  // Welcome index page
+  $('.list-all-smoothies').on('click', function(e) {
+    e.preventDefault()
+    $.ajax({
+      url: '/smoothies',
+      method: 'get',
+      dataType: 'json'
+    }).done(function(data) {
+      console.log(data)
+      $('#smoothies-list .card-columns').hide()
+      data.data.forEach(function(singleData) {
+        let smoothie = new Smoothie({data: singleData})
+        smoothieCard = smoothie.renderCard()
+        $('#smoothies-list .card-columns').prepend(smoothieCard).fadeIn("slow")
+      })
+      $('#smoothies-list .card-columns').fadeIn("slow")
+    }).fail((data) => console.log(data))
+  })
 
   // Add / Edit smoothie
   $('#new_smoothy').on('submit', function(e) {
@@ -37,14 +55,14 @@ $(function(){
 
       if (!currentSmoothie) {
         currentSmoothie = smoothie.id
-        smoothieCard = smoothie.renderCard()
+        smoothieCard = smoothie.renderCard(true)
         $('#smoothies-list .card-columns').hide().prepend(smoothieCard).fadeIn("slow")
       } else {
         smoothie.updateCard()
       }
       $('#smoothieFormModal').modal('hide')
       Smoothie.resetSmoothieForm()
-    })
+    }).fail((data) => console.log(data))
 
   })
 
@@ -60,7 +78,7 @@ $(function(){
       url: url
     }).done((data) => {
       $(this).closest('div.card').fadeOut(400, function() { $(this).remove() })
-    })
+    }).fail((data) => console.log(data))
   })
 
   // Populate form for edition
@@ -79,7 +97,7 @@ $(function(){
       currentSmoothie = smoothie.id
       smoothie.populateForm()
       $('#smoothieFormModal').modal('show')
-    })
+    }).fail((data) => console.log(data))
   })
 
   $('#smoothies-list').on('click', '.card', function (e) {
@@ -91,11 +109,10 @@ $(function(){
       dataType: 'json'
     }).done(function(data) {
       let smoothie = new Smoothie(data)
-      console.log(data)
 
       $('#smoothieFullCard .smoothie-ingredients ul').html('')
       smoothie.populateFullCard()
-    })
+    }).fail((data) => console.log(data))
   })
 
   // Add ingredient field on the form
@@ -114,5 +131,7 @@ $(function(){
     Smoothie.resetSmoothieForm()
     currentSmoothie = null
   })
+}
 
-})
+$(document).ready(ready);
+$(document).on('turbolinks:load', ready);

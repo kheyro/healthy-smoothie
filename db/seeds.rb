@@ -25,9 +25,19 @@ yogurt = Category.create(name: "Yogurt smoothie")
 # Smoothie
 first_smoothie = john.smoothies.create(
   name: "My first smoothie",
-  description: "The perfect protein smoothie after a long work out session, refreshing, energizing and full of protein!")
-first_smoothie.category = protein
+  description: "The perfect protein smoothie after a long work out session, refreshing, energizing and full of protein!",
+  visibility: "public",
+  category: protein)
+first_smoothie.quantities.create(ingredient: Ingredient.first, quantity: 10, unit: "pcs")
+first_smoothie.quantities.create(ingredient: Ingredient.last, quantity: 5, unit: "g")
 first_smoothie.save
-first_smoothie.quantities.create(ingredient: Ingredient.first, unit: "pcs")
-first_smoothie.quantities.create(ingredient: Ingredient.last, unit: "pcs")
-first_smoothie.save
+
+second_smoothie = john.smoothies.create(
+  name: "My second smoothie",
+  description: "The perfect protein smoothie after a long work out session, refreshing, energizing and full of protein!",
+  visibility: "public",
+  category: vegan)
+second_smoothie.quantities.create(ingredient: Ingredient.find(5), quantity: 1, unit: "pcs")
+second_smoothie.quantities.create(ingredient: Ingredient.find(6), quantity: 7, unit: "g")
+second_smoothie.quantities.create(ingredient: Ingredient.find(10), quantity: 12, unit: "ml")
+second_smoothie.save

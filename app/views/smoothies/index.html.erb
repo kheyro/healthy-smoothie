@@ -25,41 +25,6 @@
   </div>
 </div>
 
-<div class="modal fade" id="smoothieFullCardModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div id="smoothieFullCard" class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title smoothie-title"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row smoothie-description">
-          <div class="col">
-            <p></p>
-          </div>
-        </div>
-        <div class="row smoothie-ingredients">
-          <div class="col">
-            <h5>Ingredients</h5>
-            <ul>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="row">
-          <div class="col">
-            By <span class="smoothie-author"></span> in <span class="smoothie-category"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <div class="modal fade" id="smoothieFormModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -138,3 +103,5 @@
     </div>
   </div>
 </div>
+
+<%= render 'layouts/smoothie_fullcard' %>
