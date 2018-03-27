@@ -74,10 +74,12 @@ class Smoothie {
     this.id = data.data.id
     this.name = data.data.attributes.name
     this.userId = data.included[0].id
-    this.username = data.included[0].attributes.name
+    let defaultUsername = data.included[0].attributes.name
+    this.username = defaultUsername[0].toUpperCase() + defaultUsername.substr(1)
     this.description = data.data.attributes.description
     this.visibility = data.data.attributes.visibility
     this.ingredients = data.included.slice(1)
+    this.category = data.data.attributes.category.name
   }
 
   populateForm() {
@@ -106,7 +108,7 @@ class Smoothie {
             <p class="card-text">${this.description}</p>
           </div>
           <div class="card-footer">
-            <small class="smoothie-user text-muted" data-id="${this.userId}">By ${this.username}</small>
+            <small class="smoothie-user text-muted" data-id="${this.userId}">by ${this.username} in ${this.category}</small>
             <div class="card-action float-right">
               <a href="#" class="edit-smoothie">Edit</a>
               <a href="#" class="delete-smoothie">Delete</a>

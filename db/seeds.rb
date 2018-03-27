@@ -16,11 +16,11 @@ john = User.create(name: "john", email: "john@gmail.com", password: "user", role
 end
 
 # Categories
-detox = Category.create(name: "Detox smootie")
-green = Category.create(name: "Green smootie")
-protein = Category.create(name: "Protein smootie")
-vegan = Category.create(name: "Vegan smootie")
-yogurt = Category.create(name: "Yogurt smootie")
+detox = Category.create(name: "Detox smoothie")
+green = Category.create(name: "Green smoothie")
+protein = Category.create(name: "Protein smoothie")
+vegan = Category.create(name: "Vegan smoothie")
+yogurt = Category.create(name: "Yogurt smoothie")
 
 # Smoothie
 first_smoothie = john.smoothies.create(
