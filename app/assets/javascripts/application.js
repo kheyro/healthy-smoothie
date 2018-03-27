@@ -79,13 +79,16 @@ class Smoothie {
     this.description = data.data.attributes.description
     this.visibility = data.data.attributes.visibility
     this.ingredients = data.included.slice(1)
-    this.category = data.data.attributes.category.name
+    this.category = data.data.attributes.category
   }
 
   populateForm() {
     $('#new_smoothy input[name="smoothy[name]"]').val(this.name)
     $('#new_smoothy textarea[name="smoothy[description]"]').val(this.description)
     $(`#new_smoothy input[name="smoothy[visibility]"][value="${this.visibility}"]`).prop('checked', true)
+
+    $(`#new_smoothy select[name="smoothy[category_id]"] option[value=${this.category.id}]`).prop('selected', true)
+
     // // delete all ingredient field except last one (to be cloned)
     $("#ingredient-list .form-row:not(:last)").remove();
 
@@ -108,7 +111,7 @@ class Smoothie {
             <p class="card-text">${this.description}</p>
           </div>
           <div class="card-footer">
-            <small class="smoothie-user text-muted" data-id="${this.userId}">by ${this.username} in ${this.category}</small>
+            <small class="smoothie-user text-muted" data-id="${this.userId}">by ${this.username} in <span class="card-category">${this.category.name}</span></small>
             <div class="card-action float-right">
               <a href="#" class="edit-smoothie">Edit</a>
               <a href="#" class="delete-smoothie">Delete</a>
@@ -122,7 +125,8 @@ class Smoothie {
 
     $smoothieFullCard.find('h5.smoothie-title').text(this.name)
     $smoothieFullCard.find('.smoothie-description p').text(this.description)
-    $smoothieFullCard.find('.smoothie-author span').text(this.username)
+    $smoothieFullCard.find('.smoothie-author').text(this.username)
+    $smoothieFullCard.find('.smoothie-category').text(this.category.name)
 
     this.ingredients.forEach(function(el, i) {
       // console.log('Edit show#smoothy ingredient ' + i + ':', el)
@@ -137,6 +141,7 @@ class Smoothie {
     let $card = $(`.card[data-id="${this.id}"]`)
     $card.find('.card-title').text(this.name)
     $card.find('.card-text').text(this.description)
+    $card.find('.card-category').text(this.category.name)
   }
 
   static getUrl(el) {

@@ -14,7 +14,7 @@
         <p class="card-text"><%= smoothie.description %></p>
       </div>
       <div class="card-footer">
-        <small class="smoothie-user text-muted" data-id="<%= smoothie.user.id %>">by <%= smoothie.user.name.titleize %> in <%= smoothie.category.name %></small>
+        <small class="smoothie-user text-muted" data-id="<%= smoothie.user.id %>">by <%= smoothie.user.name.titleize %> in <span class="card-category"><%= smoothie.category.name %></span></small>
         <div class="card-action float-right">
           <a href="#" class="edit-smoothie">Edit</a>
           <a href="#" class="delete-smoothie">Delete</a>
@@ -49,9 +49,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <div class="row smoothie-author">
+        <div class="row">
           <div class="col">
-            By <span></span>
+            By <span class="smoothie-author"></span> in <span class="smoothie-category"></span>
           </div>
         </div>
       </div>
