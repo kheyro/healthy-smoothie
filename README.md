@@ -1,6 +1,6 @@
 # RAILS with JS Project - Healthy Smoothie
 
-Welcome to Healthy Smoothie! Show to the world your smoothies' skills, share them with the community! Drink and be healthy!
+Welcome to Healthy Smoothie! It's just a nice app to display smoothies. User can manage and share their smoothie (make them private or public), user friendly and fast!
 
 ## Installation
 
