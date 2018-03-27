@@ -1,6 +1,6 @@
-# RAILS with JS Project - Healthy Smoothy
+# RAILS with JS Project - Healthy Smoothie
 
-Welcome to Healthy Smoothy! Show to the world your smoothies' skills, share them with the community! Drink and be healthy!
+Welcome to Healthy Smoothie! Show to the world your smoothies' skills, share them with the community! Drink and be healthy!
 
 ## Installation
 
