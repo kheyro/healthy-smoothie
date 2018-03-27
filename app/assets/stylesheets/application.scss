@@ -15,6 +15,7 @@
 @import "bootstrap";
 
 html, body { height: 100% }
+.container { position: relative }
 .field_with_errors input[type="text"], .field_with_errors input[type="password"] { border: 1px solid red; }
 #error_explanation ul { padding: 0; }
 #error_explanation ul li { list-style-type: none; color: red; font-style: italic}
@@ -24,3 +25,5 @@ html, body { height: 100% }
 }
 
 #smoothies-list .card { cursor: pointer; }
+
+.btn-add-smoothie { position: absolute; bottom: 10px; right: 10px }

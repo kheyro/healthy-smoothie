@@ -1,30 +1,8 @@
 <h1><%= current_user.name %>'s Smoothies</h1>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#smoothieFormModal">
+<button type="button" class="btn-add-smoothie btn btn-primary" data-toggle="modal" data-target="#smoothieFormModal">
   Add Smoothie
 </button>
-
-<div id="smoothieFullCard">
-  <h2></h2>
-  <div class="row smoothie-description">
-    <div class="col">
-      <p></p>
-    </div>
-  </div>
-  <div class="row smoothie-ingredients">
-    <div class="col">
-      <h5>Ingredients</h5>
-      <ul>
-      </ul>
-    </div>
-  </div>
-  <div class="row smoothie-author">
-    <div class="col">
-      By <span></span>
-    </div>
-  </div>
-</div>
-
 
 <div id="smoothies-list">
   <div class="card-columns">
@@ -44,6 +22,40 @@
       </div>
     </div>
     <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="smoothieFullCardModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div id="smoothieFullCard" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title smoothie-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row smoothie-description">
+          <div class="col">
+            <p></p>
+          </div>
+        </div>
+        <div class="row smoothie-ingredients">
+          <div class="col">
+            <h5>Ingredients</h5>
+            <ul>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row smoothie-author">
+          <div class="col">
+            By <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

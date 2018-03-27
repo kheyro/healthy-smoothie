@@ -25,10 +25,11 @@ class Ingredient {
     this.id = id
     this.quantity = quantity
     this.unit = unit
+    this.name = name
   }
 
   populateFullCard() {
-    let $ingredientLI = `<li>${this.quantity} ${this.unit} of XXX</li>`
+    let $ingredientLI = `<li>${this.quantity} ${this.unit} of ${this.name}</li>`
     $('#smoothieFullCard .smoothie-ingredients ul').append($ingredientLI)
   }
 
@@ -88,7 +89,7 @@ class Smoothie {
 
     this.ingredients.forEach(function(el, i) {
       // console.log('Edit show#smoothy ingredient ' + i + ':', el)
-      let newIngredient = new Ingredient(el.attributes["ingredient-id"], el.attributes.quantity, el.attributes.unit)
+      let newIngredient = new Ingredient(el.attributes["ingredient-id"], el.attributes.quantity, el.attributes.unit, el.attributes.ingredient.name)
       newIngredient.populateForm()
     })
 
@@ -105,7 +106,7 @@ class Smoothie {
             <p class="card-text">${this.description}</p>
           </div>
           <div class="card-footer">
-            <small class="smoothie-user text-muted" data-id="${this.userId}">By ${this.name}</small>
+            <small class="smoothie-user text-muted" data-id="${this.userId}">By ${this.username}</small>
             <div class="card-action">
               <a href="#" class="edit-smoothie">Edit</a>
               <a href="#" class="delete-smoothie">Delete</a>
@@ -116,15 +117,18 @@ class Smoothie {
 
   populateFullCard() {
     let $smoothieFullCard = $('#smoothieFullCard')
-    $smoothieFullCard.find('h2').text(this.name)
+
+    $smoothieFullCard.find('h5.smoothie-title').text(this.name)
     $smoothieFullCard.find('.smoothie-description p').text(this.description)
     $smoothieFullCard.find('.smoothie-author span').text(this.username)
 
     this.ingredients.forEach(function(el, i) {
       // console.log('Edit show#smoothy ingredient ' + i + ':', el)
-      let newIngredient = new Ingredient(el.attributes["ingredient-id"], el.attributes.quantity, el.attributes.unit)
+      let newIngredient = new Ingredient(el.attributes["ingredient-id"], el.attributes.quantity, el.attributes.unit, el.attributes.ingredient.name)
       newIngredient.populateFullCard()
     })
+
+    $('#smoothieFullCardModal').modal('show')
   }
 
   updateCard(){
@@ -181,16 +185,14 @@ $(function(){
   $('#smoothies-list').on('click', '.delete-smoothie', function(e) {
     e.preventDefault()
     e.stopPropagation()
+
     let url = Smoothie.getUrl(this)
 
     $.ajax({
       method: 'delete',
       url: url
-    }).done(function(data) {
-      console.log($(this).closest('div.card').attr('data-id'))
-      $(this).closest('div.card').fadeOut('fast', function() {
-        $(this).remove()
-      })
+    }).done((data) => {
+      $(this).closest('div.card').fadeOut(400, function() { $(this).remove() })
     })
   })
 
@@ -206,6 +208,7 @@ $(function(){
       dataType: 'json'
     }).done(function(data) {
       let smoothie = new Smoothie(data)
+      console.log(data)
       currentSmoothie = smoothie.id
       smoothie.populateForm()
       $('#smoothieFormModal').modal('show')
